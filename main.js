@@ -27,8 +27,14 @@ function createSquares(gridSize) {
             newDiv.style.height = `${squareSize}px`;
             container.appendChild(newDiv);
 
-            // Attach event listener to each square
             newDiv.addEventListener("mouseenter", (event) => {
+                if (isDrawing) {
+                    event.target.style.backgroundColor = "black";
+                }
+            });
+
+            newDiv.addEventListener("mousedown", (event) => {
+                isDrawing = true;
                 if (isDrawing) {
                     event.target.style.backgroundColor = "black";
                 }
@@ -42,7 +48,6 @@ createSquares(gridSize);
 let isDrawing = false;
 
 document.querySelector("#container").addEventListener("mousedown", () => {
-    isDrawing = true;
 });
 
 document.querySelector("#container").addEventListener("mouseup", () => {
