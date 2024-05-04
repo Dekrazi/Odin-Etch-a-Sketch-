@@ -1,0 +1,18 @@
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: start;
+  align-items: auto;
+  align-content: start;
+  height: 960px;
+  width: 960px;
+}
+
+.square {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+  box-sizing: border-box;
+}
