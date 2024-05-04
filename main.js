@@ -1,19 +1,50 @@
+let gridSize = 16;
 
-
-function setSize(num) {
-    
+function setSize() {
+    gridSize = parseInt(document.querySelector("#gridSize").value);
+    createSquares(gridSize);
 }
 
-let GRID = 16 * 16
+const submit = document.querySelector("#btnSub");
+submit.addEventListener("click", setSize);
 
-function createSquares (GRID) {
-    const container = document.querySelector("#container")
-    for (let i = 0; i < GRID; i++) {
-        const newDiv = document.createElement("div")
-        newDiv.classList.add("square")
-        container.appendChild(newDiv)
+const clear = document.querySelector("#btnClear");
+clear.addEventListener("click", () =>
+    document.querySelectorAll(".square").forEach((square) => {
+        square.style.backgroundColor = "";
+    })
+);
+
+function createSquares(gridSize) {
+    const container = document.querySelector("#container");
+    container.innerHTML = "";
+    const squareSize = 660 / gridSize;
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            const newDiv = document.createElement("div");
+            newDiv.classList.add("square");
+            newDiv.style.width = `${squareSize}px`;
+            newDiv.style.height = `${squareSize}px`;
+            container.appendChild(newDiv);
+
+            // Attach event listener to each square
+            newDiv.addEventListener("mouseenter", (event) => {
+                if (isDrawing) {
+                    event.target.style.backgroundColor = "black";
+                }
+            });
+        }
     }
 }
 
-createSquares(GRID)
+createSquares(gridSize);
 
+let isDrawing = false;
+
+document.querySelector("#container").addEventListener("mousedown", () => {
+    isDrawing = true;
+});
+
+document.querySelector("#container").addEventListener("mouseup", () => {
+    isDrawing = false;
+});
